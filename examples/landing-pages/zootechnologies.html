@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZOO Technologies — AI-Powered Cinematic Web Design</title>
+  <meta name="description" content="ZOO Technologies builds premium AI-powered web experiences. Cinematic design, autonomous agents, zero compromise.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0b;
+      --bg-secondary: #111113;
+      --bg-tertiary: #1a1a1e;
+      --surface-card: rgba(255,255,255,0.03);
+      --surface-hover: rgba(255,255,255,0.06);
+      --border-subtle: rgba(255,255,255,0.08);
+      --border-medium: rgba(255,255,255,0.12);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.65);
+      --text-muted: rgba(255,255,255,0.40);
+      --accent: #ff6b35;
+      --accent-glow: rgba(255,107,53,0.2);
+      --accent-subtle: rgba(255,107,53,0.08);
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --space-xl: 6rem;
+      --space-2xl: 8rem;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.03em; }
+    h1 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.05; }
+    h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 600; line-height: 1.1; }
+    h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 600; }
+    p { color: var(--text-secondary); max-width: 65ch; }
+    a { color: inherit; text-decoration: none; }
+    .label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); display: inline-block; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-md); }
+    .section { min-height: 80vh; padding: var(--space-2xl) 0; display: flex; align-items: center; position: relative; }
+
+    /* Navigation */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--space-sm) var(--space-md); background: rgba(10,10,11,0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); transition: all 0.3s ease; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; }
+    .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; gap: var(--space-md); align-items: center; }
+    .nav-links a { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta { padding: 0.5rem 1.25rem !important; background: var(--accent) !important; color: #fff !important; border-radius: var(--radius-md); font-weight: 600; box-shadow: 0 0 20px var(--accent-glow); transition: all 0.3s; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 40px var(--accent-glow); }
+
+    /* Hero */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: var(--space-xl) 0; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .glow-orb { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; }
+    .glow-orb-1 { width: 500px; height: 500px; background: var(--accent); opacity: 0.08; top: 10%; left: 20%; animation: float 8s ease-in-out infinite; }
+    .glow-orb-2 { width: 400px; height: 400px; background: #7c3aed; opacity: 0.05; bottom: 10%; right: 15%; animation: float 10s ease-in-out infinite reverse; }
+    .glow-orb-3 { width: 300px; height: 300px; background: #00d4ff; opacity: 0.04; top: 50%; left: 50%; animation: float 12s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, -30px); } }
+    .hero-content { position: relative; z-index: 1; text-align: center; max-width: 1000px; padding: 0 var(--space-md); }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); margin-bottom: var(--space-md); font-size: 0.8rem; color: var(--text-secondary); }
+    .hero-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #10b981; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { margin-bottom: var(--space-sm); }
+    .hero h1 .highlight { background: linear-gradient(135deg, var(--accent) 0%, #ffd700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-subtitle { font-size: clamp(1.125rem, 2vw, 1.5rem); color: var(--text-secondary); margin: 0 auto var(--space-md); max-width: 600px; }
+    .hero-cta { display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: var(--space-xs); padding: 1rem 2rem; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; border: none; border-radius: var(--radius-md); cursor: pointer; transition: all 0.3s ease; font-family: var(--font-body); }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 0 30px var(--accent-glow); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px var(--accent-glow); }
+    .btn-ghost { background: transparent; color: var(--text-primary); border: 1px solid var(--border-medium); }
+    .btn-ghost:hover { background: var(--surface-hover); border-color: var(--border-strong, rgba(255,255,255,0.2)); }
+    .scroll-indicator { position: absolute; bottom: var(--space-md); left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; animation: bounce 2s infinite; }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } }
+
+    /* Stats */
+    .stats-bar { padding: var(--space-lg) 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); text-align: center; }
+    .stat-number { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-primary); }
+    .stat-label { font-size: 0.875rem; color: var(--text-muted); margin-top: var(--space-xs); }
+
+    /* Features Bento */
+    .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: var(--space-sm); }
+    .card { background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--space-md); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+    .card:hover { border-color: var(--border-medium); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .card-icon { width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-subtle); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: var(--space-sm); }
+    .card h3 { margin-bottom: var(--space-xs); }
+    .card p { font-size: 0.9rem; }
+    .bento-large { grid-column: span 2; grid-row: span 2; }
+    .bento-wide { grid-column: span 2; }
+    .card-glow::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+    .card-glow:hover::before { opacity: 1; }
+
+    /* Process */
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+    .process-step { text-align: center; padding: var(--space-md); }
+    .process-number { width: 56px; height: 56px; border-radius: 50%; background: var(--surface-card); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--accent); margin: 0 auto var(--space-sm); }
+    .process-step h4 { margin-bottom: var(--space-xs); }
+
+    /* Testimonials */
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
+    .testimonial { padding: var(--space-md); }
+    .testimonial-quote { font-size: 1.1rem; font-style: italic; color: var(--text-primary); margin-bottom: var(--space-sm); line-height: 1.7; }
+    .testimonial-author { display: flex; align-items: center; gap: var(--space-sm); }
+    .testimonial-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--surface-card); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.875rem; }
+    .testimonial-name { font-weight: 600; font-size: 0.9rem; }
+    .testimonial-role { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* Pricing */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
+    .pricing-card { padding: var(--space-md); text-align: center; position: relative; }
+    .pricing-card.featured { border-color: var(--accent); box-shadow: 0 0 40px var(--accent-glow); }
+    .pricing-card.featured::before { content: 'POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; }
+    .pricing-name { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--space-xs); }
+    .pricing-price { font-family: var(--font-display); font-size: 3rem; font-weight: 700; margin: var(--space-sm) 0; }
+    .pricing-price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+    .pricing-features { list-style: none; margin: var(--space-sm) 0; text-align: left; }
+    .pricing-features li { padding: 0.5rem 0; color: var(--text-secondary); font-size: 0.9rem; border-bottom: 1px solid var(--border-subtle); }
+    .pricing-features li::before { content: '✓'; color: var(--accent); margin-right: 0.5rem; }
+
+    /* CTA */
+    .cta-section { text-align: center; background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
+    .cta-section h2 { margin-bottom: var(--space-sm); }
+    .cta-section .btn { margin-top: var(--space-md); }
+
+    /* Footer */
+    footer { padding: var(--space-xl) var(--space-md) var(--space-md); border-top: 1px solid var(--border-subtle); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-lg); }
+    .footer-brand { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; margin-bottom: var(--space-sm); }
+    .footer-desc { font-size: 0.9rem; color: var(--text-muted); }
+    .footer-col h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: var(--space-sm); color: var(--text-primary); }
+    .footer-col a { display: block; color: var(--text-muted); font-size: 0.875rem; padding: 0.25rem 0; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--text-primary); }
+    .footer-bottom { margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle); text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+
+    /* Scroll Reveal */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .stagger > *:nth-child(1) { transition-delay: 0.1s; }
+    .stagger > *:nth-child(2) { transition-delay: 0.2s; }
+    .stagger > *:nth-child(3) { transition-delay: 0.3s; }
+    .stagger > *:nth-child(4) { transition-delay: 0.4s; }
+    .stagger > *:nth-child(5) { transition-delay: 0.5s; }
+    .stagger > *:nth-child(6) { transition-delay: 0.6s; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); }
+      .bento-large { grid-column: span 2; grid-row: span 1; }
+      .bento-wide { grid-column: span 2; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+      .bento-large, .bento-wide { grid-column: span 1; }
+      .process-steps { grid-template-columns: 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .nav-links { display: none; }
+      .section { padding: var(--space-xl) 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">ZOO</div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact" class="nav-cta">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="glow-orb glow-orb-1"></div>
+      <div class="glow-orb glow-orb-2"></div>
+      <div class="glow-orb glow-orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">● Now in Beta — AI-Powered Design</div>
+      <h1>Websites That <span class="highlight">Sell Themselves</span></h1>
+      <p class="hero-subtitle">ZOO Technologies builds premium cinematic web experiences powered by autonomous AI agents. Zero compromise. Maximum conversion.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Start Building →</a>
+        <a href="#features" class="btn btn-ghost">See How It Works</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat reveal"><div class="stat-number">500+</div><div class="stat-label">Websites Built</div></div>
+        <div class="stat reveal"><div class="stat-number">$15K</div><div class="stat-label">Avg. Project Value</div></div>
+        <div class="stat reveal"><div class="stat-number">99%</div><div class="stat-label">Client Satisfaction</div></div>
+        <div class="stat reveal"><div class="stat-number">48h</div><div class="stat-label">Delivery Time</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <section id="features" class="section">
+    <div class="container">
+      <div class="reveal" style="text-align: center; margin-bottom: var(--space-xl);">
+        <span class="label">Features</span>
+        <h2>Everything You Need to <span style="color: var(--accent);">Dominate</span></h2>
+        <p style="margin: var(--space-sm) auto 0;">Our AI agents handle the entire design pipeline — from concept to deployment.</p>
+      </div>
+      <div class="bento-grid stagger">
+        <div class="card bento-large card-glow reveal">
+          <div class="card-icon">🎬</div>
+          <h3>Cinematic Design</h3>
+          <p>Every page is a movie scene. Scroll-driven animations, parallax effects, glassmorphism, and dramatic typography that makes visitors stop and stare.</p>
+        </div>
+        <div class="card card-glow reveal">
+          <div class="card-icon">🤖</div>
+          <h3>AI Agents</h3>
+          <p>Autonomous design agents that work 24/7. They research, design, code, and iterate without human intervention.</p>
+        </div>
+        <div class="card card-glow reveal">
+          <div class="card-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>48-hour delivery guaranteed. Our pipeline goes from brief to production-ready website in two days.</p>
+        </div>
+        <div class="card bento-wide card-glow reveal">
+          <div class="card-icon">🎨</div>
+          <h3>Zero Generic Templates</h3>
+          <p>Every design is unique. Our AI generates custom layouts, color palettes, and visual identities tailored to your brand. No templates. No shortcuts.</p>
+        </div>
+        <div class="card card-glow reveal">
+          <div class="card-icon">📊</div>
+          <h3>Conversion Optimized</h3>
+          <p>Data-driven CTAs, social proof placement, and psychological triggers built into every design decision.</p>
+        </div>
+        <div class="card card-glow reveal">
+          <div class="card-icon">🚀</div>
+          <h3>One-Click Deploy</h3>
+          <p>Push to Vercel, GitHub Pages, or Cloudflare with a single command. Custom domains, SSL, and CDN included.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="reveal" style="text-align: center; margin-bottom: var(--space-xl);">
+        <span class="label">Process</span>
+        <h2>From Brief to <span style="color: var(--accent);">Live</span> in 4 Steps</h2>
+      </div>
+      <div class="process-steps stagger">
+        <div class="process-step reveal">
+          <div class="process-number">01</div>
+          <h4>Brief</h4>
+          <p style="font-size: 0.9rem;">Tell us your product, target audience, and goals. Our AI analyzes your market.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-number">02</div>
+          <h4>Generate</h4>
+          <p style="font-size: 0.9rem;">Stitch AI creates 3 unique design variations. NanoBanana generates custom assets.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-number">03</div>
+          <h4>Refine</h4>
+          <p style="font-size: 0.9rem;">We iterate until perfection. Every pixel, every animation, every interaction.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-number">04</div>
+          <h4>Deploy</h4>
+          <p style="font-size: 0.9rem;">One-click deployment to production. Custom domain, SSL, CDN — all configured.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <div class="reveal" style="text-align: center; margin-bottom: var(--space-xl);">
+        <span class="label">Testimonials</span>
+        <h2>What Our <span style="color: var(--accent);">Clients</span> Say</h2>
+      </div>
+      <div class="testimonial-grid stagger">
+        <div class="card testimonial reveal">
+          <div class="testimonial-quote">"ZOO built our entire platform in 48 hours. The design quality rivals agencies charging $50K+."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JA</div>
+            <div><div class="testimonial-name">Jay E.</div><div class="testimonial-role">Founder, RoboNuggets</div></div>
+          </div>
+        </div>
+        <div class="card testimonial reveal">
+          <div class="testimonial-quote">"The cinematic scroll animations are insane. Our conversion rate jumped 340% after the redesign."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div><div class="testimonial-name">Sarah M.</div><div class="testimonial-role">CEO, TechFlow</div></div>
+          </div>
+        </div>
+        <div class="card testimonial reveal">
+          <div class="testimonial-quote">"I've worked with dozens of agencies. ZOO's AI-powered process is on another level. Unreal quality."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MR</div>
+            <div><div class="testimonial-name">Mike R.</div><div class="testimonial-role">CTO, DataPrime</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="reveal" style="text-align: center; margin-bottom: var(--space-xl);">
+        <span class="label">Pricing</span>
+        <h2>Simple, <span style="color: var(--accent);">Transparent</span> Pricing</h2>
+        <p style="margin: var(--space-sm) auto 0;">No hidden fees. No surprises. Premium design at AI speed.</p>
+      </div>
+      <div class="pricing-grid stagger">
+        <div class="card pricing-card reveal">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-price">$2,500<span>/project</span></div>
+          <ul class="pricing-features">
+            <li>1 Page Landing</li>
+            <li>Cinematic Design</li>
+            <li>Mobile Responsive</li>
+            <li>48h Delivery</li>
+            <li>1 Revision Round</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost" style="width: 100%; justify-content: center;">Get Started</a>
+        </div>
+        <div class="card pricing-card featured reveal">
+          <div class="pricing-name">Professional</div>
+          <div class="pricing-price">$7,500<span>/project</span></div>
+          <ul class="pricing-features">
+            <li>Up to 5 Pages</li>
+            <li>Cinematic + Animations</li>
+            <li>Custom Illustrations</li>
+            <li>24h Delivery</li>
+            <li>3 Revision Rounds</li>
+            <li>SEO Optimization</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Started</a>
+        </div>
+        <div class="card pricing-card reveal">
+          <div class="pricing-name">Enterprise</div>
+          <div class="pricing-price">$15,000<span>/project</span></div>
+          <ul class="pricing-features">
+            <li>Unlimited Pages</li>
+            <li>Full Cinematic Experience</li>
+            <li>Custom AI Agent</li>
+            <li>Priority Delivery</li>
+            <li>Unlimited Revisions</li>
+            <li>Dedicated Support</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost" style="width: 100%; justify-content: center;">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="section cta-section">
+    <div class="container reveal">
+      <span class="label">Ready?</span>
+      <h2>Let's Build Something <span style="color: var(--accent);">Incredible</span></h2>
+      <p style="margin: var(--space-sm) auto 0;">Join 500+ companies who transformed their web presence with ZOO.</p>
+      <a href="mailto:hello@zootechnologies.com" class="btn btn-primary" style="font-size: 1rem; padding: 1.25rem 2.5rem;">Start Your Project →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">ZOO</div>
+          <p class="footer-desc">AI-powered cinematic web design. We build websites that convert, inspire, and dominate.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#process">Process</a>
+          <a href="#testimonials">Testimonials</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+          <a href="mailto:hello@zootechnologies.com">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 ZOO Technologies. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll Reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      nav.style.background = window.scrollY > 100 ? 'rgba(10,10,11,0.95)' : 'rgba(10,10,11,0.8)';
+    });
+  </script>
+</body>
+</html>
