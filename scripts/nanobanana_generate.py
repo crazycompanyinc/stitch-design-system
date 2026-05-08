@@ -12,7 +12,7 @@ import requests, json, sys, argparse, os, base64, time
 
 # Leer API key de variable de entorno
 NANOBANANA_API_KEY = os.environ.get("STITCH_API_KEY", "")
-MODEL = "gemini-2.0-flash-exp-image-generation"
+MODEL = "nano-banana-pro-preview"
 ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent"
 
 
